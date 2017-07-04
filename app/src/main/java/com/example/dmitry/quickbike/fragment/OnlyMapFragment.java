@@ -1,9 +1,6 @@
 package com.example.dmitry.quickbike.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +12,25 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public class OnlyMapFragment extends Fragment implements OnMapReadyCallback {
 
-    private MapView mMapView;
-    // Store instance variables
+public class OnlyMapFragment extends BaseFragment implements OnMapReadyCallback {
+
+    private Unbinder mUnbinder;
     private GoogleMap mMap;
     private String title;
     private int page;
     public static final String TITLE = "title";
     public static final String PAGE_NUMBER = "page number";
+
+    @BindView(R.id.mapView) MapView mMapView;
+    @BindView(R.id.tv_label) TextView tvLabel;
 
     // newInstance constructor for creating fragment with arguments
     public static OnlyMapFragment newInstance(int page, String title) {
@@ -53,10 +55,9 @@ public class OnlyMapFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.map_fragment, container, false);
-        TextView tvLabel = (TextView) view.findViewById(R.id.tv_label);
-        tvLabel.setText(page + " -- " + title);
+        mUnbinder = ButterKnife.bind(this, view);
 
-        mMapView = (MapView) view.findViewById(R.id.mapView);
+        tvLabel.setText(page + " -- " + title);
         mMapView.onCreate(savedInstanceState);
 
         mMapView.onResume(); // needed to get the map to display immediately
@@ -67,6 +68,8 @@ public class OnlyMapFragment extends Fragment implements OnMapReadyCallback {
             e.printStackTrace();
         }
         mMapView.getMapAsync(this);
+
+
         return view;
     }
 
@@ -92,6 +95,12 @@ public class OnlyMapFragment extends Fragment implements OnMapReadyCallback {
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 
     /**
