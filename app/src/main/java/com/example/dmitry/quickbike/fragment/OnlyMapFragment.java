@@ -118,8 +118,9 @@ public class OnlyMapFragment extends BaseFragment implements OnMapReadyCallback 
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng minsk = new LatLng(53.900, 27.567);
+
+        mMap.addMarker(new MarkerOptions().position(minsk).title("The best place to live"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(minsk));
     }
 }
