@@ -1,14 +1,15 @@
 package com.example.dmitry.quickbike.activity;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
+import javax.inject.Inject;
+
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.dmitry.quickbike.R;
 import com.example.dmitry.quickbike.adapter.MyPagerAdapter;
-import com.google.android.gms.maps.GoogleMap;
+import com.example.dmitry.quickbike.db.BikeDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
