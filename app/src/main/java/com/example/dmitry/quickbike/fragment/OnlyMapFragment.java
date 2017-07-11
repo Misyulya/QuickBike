@@ -227,10 +227,8 @@ public class OnlyMapFragment extends BaseFragment implements IMapView, OnMapRead
                 .newCameraPosition(position));
 
         mMap.setMapType(MAP_TYPES[curMapTypeIndex]);
-        mMap.setMinZoomPreference(10.0f);
-        mMap.setMaxZoomPreference(12.0f);
 
-//        mMap.setTrafficEnabled(true);
+        mMap.setTrafficEnabled(true);
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
