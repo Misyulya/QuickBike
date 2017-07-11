@@ -1,5 +1,7 @@
 package com.example.dmitry.quickbike.activity;
 
+import static com.example.dmitry.quickbike.adapter.MyPagerAdapter.NUM_ITEMS;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -80,5 +82,6 @@ public class MapsActivity extends AppCompatActivity {
 
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setOffscreenPageLimit(NUM_ITEMS);
     }
 }

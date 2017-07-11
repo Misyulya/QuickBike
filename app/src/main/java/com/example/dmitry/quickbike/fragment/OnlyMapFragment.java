@@ -1,18 +1,36 @@
 package com.example.dmitry.quickbike.fragment;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Stream;
+
+import android.Manifest;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.pm.PackageManager;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.dmitry.quickbike.R;
+import com.example.dmitry.quickbike.architecture.component.MapViewModel;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
@@ -20,8 +38,25 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class OnlyMapFragment extends BaseFragment implements OnMapReadyCallback {
+public class OnlyMapFragment extends BaseFragment implements IMapView, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        GoogleMap.OnInfoWindowClickListener,
+        GoogleMap.OnMapLongClickListener,
+        GoogleMap.OnMapClickListener,
+        GoogleMap.OnMarkerClickListener {
 
+    private GoogleApiClient mGoogleApiClient;
+    private Location mCurrentLocation;
+
+    private final int[] MAP_TYPES = {GoogleMap.MAP_TYPE_SATELLITE,
+            GoogleMap.MAP_TYPE_NORMAL,
+            GoogleMap.MAP_TYPE_HYBRID,
+            GoogleMap.MAP_TYPE_TERRAIN,
+            GoogleMap.MAP_TYPE_NONE};
+    private int curMapTypeIndex = 1;
+
+    private LatLng mMinsk;
+    private MapViewModel mModel;
     private Unbinder mUnbinder;
     private GoogleMap mMap;
     private String title;
@@ -29,8 +64,8 @@ public class OnlyMapFragment extends BaseFragment implements OnMapReadyCallback 
     public static final String TITLE = "title";
     public static final String PAGE_NUMBER = "page number";
 
-    @BindView(R.id.mapView) MapView mMapView;
-    @BindView(R.id.tv_label) TextView tvLabel;
+    @BindView(R.id.mapView)
+    MapView mMapView;
 
     // newInstance constructor for creating fragment with arguments
     public static OnlyMapFragment newInstance(int page, String title) {
@@ -54,23 +89,34 @@ public class OnlyMapFragment extends BaseFragment implements OnMapReadyCallback 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mModel = ViewModelProviders.of(getActivity()).get(MapViewModel.class);
+
         View view = inflater.inflate(R.layout.map_fragment, container, false);
         mUnbinder = ButterKnife.bind(this, view);
 
-        tvLabel.setText(page + " -- " + title);
         mMapView.onCreate(savedInstanceState);
-
-        mMapView.onResume(); // needed to get the map to display immediately
-
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         mMapView.getMapAsync(this);
 
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
 
         return view;
+    }
+
+    private void initListeners() {
+        mMap.setOnMarkerClickListener(this);
+        mMap.setOnMapLongClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
+        mMap.setOnMapClickListener(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
     }
 
     @Override
@@ -86,9 +132,17 @@ public class OnlyMapFragment extends BaseFragment implements OnMapReadyCallback 
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
-        mMapView.onDestroy();
+        if (mMapView != null) mMapView.onDestroy();
     }
 
     @Override
@@ -117,10 +171,132 @@ public class OnlyMapFragment extends BaseFragment implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng minsk = new LatLng(53.900, 27.567);
+        initListeners();
 
-        mMap.addMarker(new MarkerOptions().position(minsk).title("The best place to live"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(minsk));
+        mModel.getMarkersOptions().observe(this, markerOptions -> {
+            for (MarkerOptions options: markerOptions){
+                mMap.addMarker(options);
+            }
+        });
+
+        // Add a marker in Minsk and move the camera
+        mMinsk = new LatLng(53.900, 27.567);
+
+        mMap.addMarker(new MarkerOptions().position(mMinsk).title("The best place to live"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(mMinsk));
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mCurrentLocation = LocationServices
+                .FusedLocationApi
+                .getLastLocation(mGoogleApiClient);
+
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Location target = new Location("Minsk");
+        target.setLatitude(mMinsk.latitude);
+        target.setLongitude(mMinsk.longitude);
+        initCamera(target);
+    }
+
+    private void initCamera(Location location) {
+        CameraPosition position = CameraPosition.builder()
+                .target(new LatLng(location.getLatitude(),
+                        location.getLongitude()))
+                .zoom(11.7f)
+                .bearing(0.0f)
+                .tilt(0.0f)
+                .build();
+
+        mMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(position));
+
+        mMap.setMapType(MAP_TYPES[curMapTypeIndex]);
+        mMap.setMinZoomPreference(10.0f);
+        mMap.setMaxZoomPreference(12.0f);
+
+//        mMap.setTrafficEnabled(true);
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        MarkerOptions options = new MarkerOptions().position(latLng);
+        options.title(getAddressFromLatLng(latLng));
+
+        options.icon(BitmapDescriptorFactory.defaultMarker());
+        mMap.addMarker(options);
+    }
+
+    private String getAddressFromLatLng(LatLng latLng) {
+        Geocoder geocoder = new Geocoder(getActivity());
+
+        String address = "";
+        try {
+            address = geocoder
+                    .getFromLocation(latLng.latitude, latLng.longitude, 1)
+                    .get(0).getAddressLine(0);
+        } catch (IOException e) {
+        }
+
+        return address;
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        marker.showInfoWindow();
+        return true;
+    }
+
+    @Override
+    public void addMarkersToMap(List<Marker> markers) {
+
     }
 }

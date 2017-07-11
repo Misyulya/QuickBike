@@ -13,7 +13,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     private String mTabTitles[] = new String[]{"Map", "Personal", "Help"};
     private Context mContext;
-    private static int NUM_ITEMS = 3;
+    public final static int NUM_ITEMS = 3;
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
