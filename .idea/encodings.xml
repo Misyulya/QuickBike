@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dmitry/quickbike/db/BikeDatabase.kt" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dmitry/quickbike/db/dao/ShopsDao.kt" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dmitry/quickbike/di" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dmitry/quickbike/utils/RxExtensions.kt" charset="windows-1251" />
+  </component>
+</project>
