@@ -5,7 +5,6 @@ import com.example.dmitry.quickbike.BikeApp
 import com.example.dmitry.quickbike.architecture.repository.ShopRepository
 import com.example.dmitry.quickbike.entity.Shop
 import io.reactivex.disposables.Disposable
-import sport.dev.sturdy.vm.BaseViewModel
 import javax.inject.Inject
 
 
