@@ -5,4 +5,8 @@
     <string name="tab1">Map</string>
     <string name="tab2">Personal</string>
     <string name="tab3">Help</string>
+
+    <string name="bicycle_icon">&#xf206;</string>
+    <string name="personal_icon">&#xf206;</string>
+    <string name="help_icon">&#xf0c0;</string>
 </resources>

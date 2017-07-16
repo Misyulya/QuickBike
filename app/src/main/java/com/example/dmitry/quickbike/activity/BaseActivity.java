@@ -1,18 +1,16 @@
 package com.example.dmitry.quickbike.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
-import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+
     }
 }

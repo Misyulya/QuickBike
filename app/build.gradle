@@ -56,7 +56,6 @@ dependencies {
     compile "android.arch.lifecycle:extensions:1.0.0-alpha3"
     annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha3"
 
-
     // Room
     compile "android.arch.persistence.room:runtime:$roomVersion"
     compile "android.arch.persistence.room:rxjava2:$roomVersion"
@@ -74,6 +73,9 @@ dependencies {
 
     // koltin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    //calligraphy - custom fonts library
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 }
 
 repositories {
