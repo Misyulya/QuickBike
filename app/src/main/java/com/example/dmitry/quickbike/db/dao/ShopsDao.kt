@@ -11,5 +11,8 @@ interface ShopsDao {
     @Query("SELECT * FROM Shop")
     fun getAllShops() : Flowable<List<Shop>>
 
-    @Insert fun insert(shop: Shop)
+    @Query("SELECT count(*) FROM Shop")
+    fun getShopsCount() : Flowable<Int>
+
+    @Insert fun insertMultiple(shop: List<Shop>)
 }
