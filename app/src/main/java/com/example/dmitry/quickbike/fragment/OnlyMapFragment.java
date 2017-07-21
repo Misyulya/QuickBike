@@ -2,7 +2,6 @@ package com.example.dmitry.quickbike.fragment;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Stream;
 
 import android.Manifest;
 import android.arch.lifecycle.ViewModelProviders;
@@ -18,7 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dmitry.quickbike.R;
-import com.example.dmitry.quickbike.architecture.component.MapViewModel;
+import com.example.dmitry.quickbike.architecture.vm.MapViewModel;
+import com.example.dmitry.quickbike.entity.Shop;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -173,12 +173,15 @@ public class OnlyMapFragment extends BaseFragment implements IMapView, OnMapRead
 
         initListeners();
 
-        mModel.getMarkersOptions().observe(this, markerOptions -> {
-            for (MarkerOptions options: markerOptions){
-                mMap.addMarker(options);
+        mModel.init().getShopsLiveData().observe(this, shops -> {
+            if(shops == null) return;
+
+            for (Shop shop : shops) {
+                mMap.addMarker(shop.getMarkerOptions());
             }
         });
 
+        //TODO LM_DM remove after tests
         // Add a marker in Minsk and move the camera
         mMinsk = new LatLng(53.900, 27.567);
 

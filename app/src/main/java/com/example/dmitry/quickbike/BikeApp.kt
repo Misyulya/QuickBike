@@ -5,13 +5,13 @@ import com.example.dmitry.quickbike.di.AppComponent
 import com.example.dmitry.quickbike.di.AppModule
 import com.example.dmitry.quickbike.di.DaggerAppComponent
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
-
-
+import com.example.dmitry.quickbike.utils.fillContent
+import com.example.dmitry.quickbike.utils.isEmpty
 
 class BikeApp : Application() {
     companion object {
-        lateinit var instance : BikeApp
-        lateinit var  appComponent: AppComponent
+        lateinit var instance: BikeApp
+        lateinit var appComponent: AppComponent
     }
 
     override fun onCreate() {
@@ -24,6 +24,12 @@ class BikeApp : Application() {
                 .build()
         )
         appComponent = createComponent()
+        val db = appComponent.getDb()
+        db.isEmpty()
+                .filter { isEmpty -> isEmpty }
+                .flatMapCompletable { db.fillContent() }
+                .subscribe()
+
     }
 
     private fun createComponent(): AppComponent {

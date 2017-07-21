@@ -7,23 +7,23 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-fun <T> Flowable<T>.wrapAsync(): Flowable<T> {
+fun <T> Flowable<T>.doAsync(): Flowable<T> {
     return subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }
 
-fun <T> Observable<T>.wrapAsync(): Observable<T> {
+fun <T> Observable<T>.doAsync(): Observable<T> {
     return subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }
 
 
-fun <T> Single<T>.wrapAsync(): Single<T> {
+fun <T> Single<T>.doAsync(): Single<T> {
     return subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }
 
-fun Completable.wrapAsync(): Completable {
+fun Completable.doAsync(): Completable {
     return subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

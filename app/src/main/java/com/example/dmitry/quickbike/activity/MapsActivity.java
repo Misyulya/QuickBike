@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.example.dmitry.quickbike.R;
 import com.example.dmitry.quickbike.adapter.MyPagerAdapter;
+import com.example.dmitry.quickbike.ui.NonSwipeableViewPager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,7 +19,7 @@ public class MapsActivity extends BaseActivity {
 
     private MenuItem prevMenuItem;
 
-    @BindView(R.id.view_pager) ViewPager mViewPager;
+    @BindView(R.id.view_pager) NonSwipeableViewPager mViewPager;
     @BindView(R.id.bottom_navigation) BottomNavigationView mBottomNavigationView;
 
     @Override
