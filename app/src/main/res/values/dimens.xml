@@ -2,5 +2,12 @@
 <resources>
 
     <dimen name="tab_height">48dp</dimen>
+    <dimen name="bottom_navigation_view_height">60dp</dimen>
 
+
+    <!--Padding-->
+    <dimen name="padding_tiny">5dp</dimen>
+    <dimen name="padding_normal">10dp</dimen>
+    <dimen name="padding_middle">15dp</dimen>
+    <dimen name="padding_big">20dp</dimen>
 </resources>

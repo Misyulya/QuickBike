@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingBottom="60dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/bottom_navigation_view_height">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -12,4 +11,16 @@
         android:layout_height="match_parent"
         />
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/search_widget"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/padding_big"
+        android:elevation="@dimen/padding_tiny">
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
