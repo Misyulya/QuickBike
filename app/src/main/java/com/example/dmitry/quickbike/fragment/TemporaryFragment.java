@@ -7,13 +7,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.dmitry.quickbike.R;
+import com.example.dmitry.quickbike.architecture.vm.BaseViewModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-
-public class TemporaryFragment extends BaseFragment {
+													//TODO LM_ALL replace with real type when ready
+public class TemporaryFragment extends BaseFragment<BaseViewModel> {
 
     private Unbinder mUnbinder;
     private String title;
@@ -53,5 +56,11 @@ public class TemporaryFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    @NotNull
+    @Override
+    protected Class<BaseViewModel> getViewModelClass() {
+        return BaseViewModel.class;
     }
 }
