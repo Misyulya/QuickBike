@@ -56,6 +56,8 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:11.0.2'
     testCompile 'junit:junit:4.12'
 
+    compile 'com.shawnlin:number-picker:2.4.4'
+
     // Architecture components
     compile "android.arch.lifecycle:runtime:1.0.0-alpha3"
     compile "android.arch.lifecycle:extensions:1.0.0-alpha3"

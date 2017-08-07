@@ -8,19 +8,13 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent"/>
 
-    <RelativeLayout
-        android:id="@+id/search_widget"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/colorPrimary"
-        android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/padding_big"
-        android:elevation="@dimen/padding_tiny">
+    <com.example.dmitry.quickbike.ui.widget.BicycleSearchWidget
+        android:layout_margin="@dimen/padding_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-
-    </RelativeLayout>
+    </com.example.dmitry.quickbike.ui.widget.BicycleSearchWidget>
 
 </RelativeLayout>

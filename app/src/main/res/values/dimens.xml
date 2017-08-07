@@ -3,11 +3,17 @@
 
     <dimen name="tab_height">48dp</dimen>
     <dimen name="bottom_navigation_view_height">60dp</dimen>
-
+    <dimen name="whole_search_widget_height">100dp</dimen>
+    <dimen name="search_widget_height_to_divider">60dp</dimen>
+    <dimen name="search_button_width">50dp</dimen>
 
     <!--Padding-->
     <dimen name="padding_tiny">5dp</dimen>
     <dimen name="padding_normal">10dp</dimen>
     <dimen name="padding_middle">15dp</dimen>
     <dimen name="padding_big">20dp</dimen>
+
+    <dimen name="search_widget_text_view_text_size">13sp</dimen>
+    <dimen name="search_widget_hint_text_size">9sp</dimen>
+    <dimen name="search_widget_icon_text_size">15sp</dimen>
 </resources>

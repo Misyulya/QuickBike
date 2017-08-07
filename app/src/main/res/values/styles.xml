@@ -8,4 +8,61 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="FullWidth">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="FullHeight">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MatchParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="WrapContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SearchWidgetTextView" parent="Base.TextAppearance.AppCompat.Widget.TextView.SpinnerItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/padding_tiny</item>
+        <item name="android:textSize">@dimen/search_widget_text_view_text_size</item>
+    </style>
+
+    <style name="SearchWidgetHintTextView" parent="SearchWidgetTextView">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">@dimen/search_widget_hint_text_size</item>
+    </style>
+
+    <style name="SearchWidgetIconTextView" parent="SearchWidgetHintTextView">
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:textSize">@dimen/search_widget_icon_text_size</item>
+    </style>
+
+
+
+    <style name="SearchWidgetLayout" >
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_marginTop">@dimen/padding_tiny</item>
+        <item name="android:layout_marginBottom">@dimen/padding_tiny</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginEnd">@dimen/padding_tiny</item>
+        <item name="android:background">@color/backgroundLight</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/backgroundLight</item>
+        <item name="android:colorAccent">@color/colorTextPrimary</item>
+    </style>
 </resources>
+
+
+
