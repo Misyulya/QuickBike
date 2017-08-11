@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingBottom="60dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:paddingBottom="@dimen/bottom_navigation_view_height">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent"/>
 
-</LinearLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        card_view:cardCornerRadius="5dp"
+        android:layout_marginEnd="@dimen/padding_normal"
+        android:layout_marginStart="@dimen/padding_normal"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:layout_height="wrap_content">
+
+    <com.example.dmitry.quickbike.ui.widget.BicycleSearchWidget
+        android:id="@+id/search_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </com.example.dmitry.quickbike.ui.widget.BicycleSearchWidget>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

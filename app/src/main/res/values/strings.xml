@@ -5,4 +5,25 @@
     <string name="tab1">Map</string>
     <string name="tab2">Personal</string>
     <string name="tab3">Help</string>
+
+    <string name="bicycle_icon">&#xf206;</string>
+    <string name="personal_icon">&#xf206;</string>
+    <string name="help_icon">&#xf0c0;</string>
+    <string name="ok_button">Ok</string>
+    <string name="cancel_button">cancel</string>
+
+    <!--BicycleSearchWidget-->
+    <string name="date_icon">&#xf073;</string>
+    <string name="quantity_icon">@string/bicycle_icon</string>
+    <string name="rent_time_icon">&#xf017;</string>
+    <string name="expand_icon">&#xf103;</string>
+    <string name="collapse_icon">&#xf102;</string>
+    <string name="search_icon">&#xf002;</string>
+    <string name="from_time">from</string>
+    <string name="till_time">till</string>
+
+    <!--Toast messages-->
+    <string name="toast_bad_date">"Oops… The selected date has already passed"</string>
+    <string name="toast_bad_time">"Oops… The selected time has already passed"</string>
+    <string name="toast_bad_till_time">"\"Till\" time must be later than \"from\""</string>
 </resources>

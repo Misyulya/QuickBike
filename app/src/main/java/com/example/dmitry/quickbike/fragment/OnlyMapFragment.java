@@ -207,7 +207,7 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         Location target = new Location("Minsk");
         target.setLatitude(mMinsk.latitude);
@@ -296,7 +296,6 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
 
     @Override
     public void addMarkersToMap(List<Marker> markers) {
-
     }
 
     @NotNull
@@ -305,8 +304,3 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
         return MapViewModel.class;
     }
 }
-
-
-
-
-

@@ -22,7 +22,10 @@ public class TemporaryFragment extends BaseFragment<BaseViewModel> {
     private String title;
     private int page;
 
-    @BindView(R.id.tv_label) TextView tvLabel;
+    @BindView(R.id.tv_label)
+    TextView mTvLabel;
+    @BindView(R.id.tv_icon)
+    TextView mTvIcon;
 
     // newInstance constructor for creating fragment with arguments
     public static TemporaryFragment newInstance(int page, String title) {
@@ -48,7 +51,8 @@ public class TemporaryFragment extends BaseFragment<BaseViewModel> {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.temporary_fragment, container, false);
         mUnbinder = ButterKnife.bind(this, view);
-        tvLabel.setText(page + " -- " + title);
+        mTvLabel.setText(page + " -- " + title);
+        mTvIcon.setText(getResources().getString(R.string.bicycle_icon));
         return view;
     }
 
