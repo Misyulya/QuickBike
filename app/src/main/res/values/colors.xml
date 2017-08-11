@@ -20,4 +20,6 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+    <color name="transparent">@android:color/transparent</color>
+
 </resources>

@@ -55,7 +55,7 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginEnd">@dimen/padding_tiny</item>
-        <item name="android:background">@color/backgroundLight</item>
+        <item name="android:background">@drawable/rounded_corners_light_color</item>
     </style>
 
     <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
