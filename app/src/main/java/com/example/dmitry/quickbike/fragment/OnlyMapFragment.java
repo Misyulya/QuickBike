@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import android.Manifest;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.Location;
@@ -33,12 +32,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.jetbrains.annotations.NotNull;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class OnlyMapFragment extends BaseFragment implements IMapView, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapView, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnMapLongClickListener,
@@ -56,7 +57,6 @@ public class OnlyMapFragment extends BaseFragment implements IMapView, OnMapRead
     private int curMapTypeIndex = 1;
 
     private LatLng mMinsk;
-    private MapViewModel mModel;
     private Unbinder mUnbinder;
     private GoogleMap mMap;
     private String title;
@@ -89,9 +89,7 @@ public class OnlyMapFragment extends BaseFragment implements IMapView, OnMapRead
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mModel = ViewModelProviders.of(getActivity()).get(MapViewModel.class);
-
-        View view = inflater.inflate(R.layout.map_fragment, container, false);
+        View view = createView(R.layout.map_fragment, inflater, container);
         mUnbinder = ButterKnife.bind(this, view);
 
         mMapView.onCreate(savedInstanceState);
@@ -173,7 +171,7 @@ public class OnlyMapFragment extends BaseFragment implements IMapView, OnMapRead
 
         initListeners();
 
-        mModel.init().getShopsLiveData().observe(this, shops -> {
+        getViewModel().init().getShopsLiveData().observe(this, shops -> {
             if(shops == null) return;
 
             for (Shop shop : shops) {
@@ -300,4 +298,9 @@ public class OnlyMapFragment extends BaseFragment implements IMapView, OnMapRead
     public void addMarkersToMap(List<Marker> markers) {
     }
 
+    @NotNull
+    @Override
+    protected Class<MapViewModel> getViewModelClass() {
+        return MapViewModel.class;
+    }
 }
