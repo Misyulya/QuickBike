@@ -26,4 +26,9 @@
     <string name="toast_bad_date">"Oops… The selected date has already passed"</string>
     <string name="toast_bad_time">"Oops… The selected time has already passed"</string>
     <string name="toast_bad_till_time">"\"Till\" time must be later than \"from\""</string>
+
+    <!--CheckBox-->
+    <string name="checkbox_male">male</string>
+    <string name="checkbox_female">female</string>
+    <string name="checkbox_kids">kids</string>
 </resources>

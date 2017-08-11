@@ -1,148 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    android:id="@+id/main_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:background="@color/colorPrimary"
-                    android:clickable="true"
-                    tools:ignore="MissingPrefix">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/main_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="@color/colorPrimary"
+                android:clickable="true"
+                tools:ignore="MissingPrefix">
+
+    <Button
+        android:id="@+id/expand_button"
+        fontPath="fonts/fontawesome-webfont.ttf"
+        android:layout_width="@dimen/expand_button_width"
+        android:layout_height="@dimen/expand_button_height"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/padding_tiny"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="@string/expand_icon"/>
+
+    <LinearLayout
+        android:id="@+id/choice_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_widget_height_to_divider"
+        android:layout_toEndOf="@id/expand_button"
+        android:layout_toStartOf="@+id/search_button">
+
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/search_widget_height_to_divider"
-            android:layout_toStartOf="@+id/search_button">
+            android:id="@+id/date_choice"
+            style="@style/SearchWidgetLayout"
+            android:layout_weight="4"
+            android:clickable="true">
 
-            <Button
-                android:id="@+id/expand_button"
+            <TextView
+                style="@style/SearchWidgetIconTextView"
                 fontPath="fonts/fontawesome-webfont.ttf"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/padding_tiny"
-                android:layout_weight="1"
-                android:background="?selectableItemBackgroundBorderless"
-                android:text="@string/expand_icon"/>
+                android:text="@string/date_icon"/>
 
-            <LinearLayout
-                android:id="@+id/date_choice"
-                style="@style/SearchWidgetLayout"
-                android:layout_weight="4"
-                android:clickable="true">
-
-                <TextView
-                    style="@style/SearchWidgetIconTextView"
-                    fontPath="fonts/fontawesome-webfont.ttf"
-                    android:text="@string/date_icon"/>
-
-                <TextView
-                    android:id="@+id/date_text_view"
-                    style="@style/SearchWidgetTextView"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/time_from_choice"
-                style="@style/SearchWidgetLayout"
-                android:layout_weight="4">
-
-                <TextView
-                    style="@style/SearchWidgetIconTextView"
-                    fontPath="fonts/fontawesome-webfont.ttf"
-                    android:text="@string/rent_time_icon"/>
-
-                <TextView
-                    style="@style/SearchWidgetHintTextView"
-                    android:text="@string/from_time"/>
-
-                <TextView
-                    android:id="@+id/from_time_text_view"
-                    style="@style/SearchWidgetTextView"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/time_till_choice"
-                style="@style/SearchWidgetLayout"
-                android:layout_weight="4">
-
-                <TextView
-                    style="@style/SearchWidgetIconTextView"
-                    fontPath="fonts/fontawesome-webfont.ttf"
-                    android:text="@string/rent_time_icon"/>
-
-                <TextView
-                    style="@style/SearchWidgetHintTextView"
-                    android:text="@string/till_time"/>
-
-                <TextView
-                    android:id="@+id/till_time_text_view"
-                    style="@style/SearchWidgetTextView"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/quantity_choice"
-                style="@style/SearchWidgetLayout"
-                android:layout_weight="2"
-                android:clickable="true">
-
-                <TextView
-                    style="@style/SearchWidgetIconTextView"
-                    fontPath="fonts/fontawesome-webfont.ttf"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:text="@string/quantity_icon"/>
-
-                <TextView
-                    android:id="@+id/quantity_text_view"
-                    style="@style/SearchWidgetTextView"/>
-
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/date_text_view"
+                style="@style/SearchWidgetTextView"/>
         </LinearLayout>
-
-        <!--android:background="?android:selectableItemBackground"-->
-        <Button
-            android:id="@+id/search_button"
-            fontPath="fonts/fontawesome-webfont.ttf"
-            android:layout_width="@dimen/search_button_width"
-            android:layout_height="@dimen/search_button_width"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="@dimen/padding_tiny"
-            android:layout_marginEnd="@dimen/padding_tiny"
-            android:layout_marginTop="@dimen/padding_tiny"
-            android:background="?selectableItemBackgroundBorderless"
-            android:text="@string/search_icon"/>
-
 
         <LinearLayout
-            android:id="@+id/checkbox_container"
-            style="@style/FullWidth"
-            android:layout_below="@+id/search_button"
-            android:visibility="gone">
+            android:id="@+id/time_from_choice"
+            style="@style/SearchWidgetLayout"
+            android:layout_weight="4">
 
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="Male"/>
+            <TextView
+                style="@style/SearchWidgetIconTextView"
+                fontPath="fonts/fontawesome-webfont.ttf"
+                android:text="@string/rent_time_icon"/>
 
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="Female"/>
+            <TextView
+                style="@style/SearchWidgetHintTextView"
+                android:text="@string/from_time"/>
 
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Kids"/>
+            <TextView
+                android:id="@+id/from_time_text_view"
+                style="@style/SearchWidgetTextView"/>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/time_till_choice"
+            style="@style/SearchWidgetLayout"
+            android:layout_weight="4">
 
-    </RelativeLayout>
+            <TextView
+                style="@style/SearchWidgetIconTextView"
+                fontPath="fonts/fontawesome-webfont.ttf"
+                android:text="@string/rent_time_icon"/>
+
+            <TextView
+                style="@style/SearchWidgetHintTextView"
+                android:text="@string/till_time"/>
+
+            <TextView
+                android:id="@+id/till_time_text_view"
+                style="@style/SearchWidgetTextView"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quantity_choice"
+            style="@style/SearchWidgetLayout"
+            android:layout_weight="2"
+            android:clickable="true">
+
+            <TextView
+                style="@style/SearchWidgetIconTextView"
+                fontPath="fonts/fontawesome-webfont.ttf"
+                android:background="?selectableItemBackgroundBorderless"
+                android:text="@string/quantity_icon"/>
+
+            <TextView
+                android:id="@+id/quantity_text_view"
+                style="@style/SearchWidgetTextView"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/search_button"
+        fontPath="fonts/fontawesome-webfont.ttf"
+        android:layout_width="@dimen/search_button_width"
+        android:layout_height="@dimen/search_button_width"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/padding_tiny"
+        android:layout_marginEnd="@dimen/padding_tiny"
+        android:layout_marginTop="@dimen/padding_tiny"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="@string/search_icon"/>
+
+
+    <LinearLayout
+        android:id="@+id/checkbox_container"
+        style="@style/FullWidth"
+        android:layout_below="@+id/search_button"
+        android:layout_toEndOf="@id/expand_button"
+        android:layout_toStartOf="@id/search_button"
+        android:visibility="gone">
+
+        <CheckBox
+            android:id="@+id/male_checkbox"
+            style="@style/SearchCheckBox"
+            android:checked="true"
+            android:text="@string/checkbox_male"/>
+
+        <CheckBox
+            android:id="@+id/female_checkbox"
+            style="@style/SearchCheckBox"
+            android:checked="true"
+            android:text="@string/checkbox_female"/>
+
+        <CheckBox
+            android:id="@+id/kids_checkbox"
+            style="@style/SearchCheckBox"
+            android:text="@string/checkbox_kids"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
 

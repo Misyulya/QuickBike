@@ -78,7 +78,8 @@ public class BicycleSearchWidget extends RelativeLayout {
         addView(view);
     }
 
-    @OnClick({R.id.expand_button, R.id.date_choice, R.id.quantity_choice, R.id.time_from_choice, R.id.time_till_choice})
+    @OnClick({R.id.expand_button, R.id.date_choice, R.id.quantity_choice, R.id.time_from_choice, R.id.time_till_choice,
+            R.id.male_checkbox, R.id.female_checkbox, R.id.kids_checkbox})
     void onButtonsClick(View view) {
         Date currentDate = roundingTime(new Date());
         if (mFromDate.before(currentDate)) mFromDate = currentDate;

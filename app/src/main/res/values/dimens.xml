@@ -6,6 +6,8 @@
     <dimen name="whole_search_widget_height">100dp</dimen>
     <dimen name="search_widget_height_to_divider">60dp</dimen>
     <dimen name="search_button_width">50dp</dimen>
+    <dimen name="expand_button_height">@dimen/search_button_width</dimen>
+    <dimen name="expand_button_width">25dp</dimen>
 
     <!--Padding-->
     <dimen name="padding_tiny">5dp</dimen>
