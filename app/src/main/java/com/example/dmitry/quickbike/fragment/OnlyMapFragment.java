@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.example.dmitry.quickbike.R;
 import com.example.dmitry.quickbike.architecture.vm.MapViewModel;
@@ -48,6 +49,7 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
 
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1000;
 
     private final int[] MAP_TYPES = {GoogleMap.MAP_TYPE_SATELLITE,
             GoogleMap.MAP_TYPE_NORMAL,
@@ -66,6 +68,8 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
 
     @BindView(R.id.mapView)
     MapView mMapView;
+    @BindView(R.id.bottom_sheet)
+    FrameLayout mBottomSheetFrameLayout;
 
     // newInstance constructor for creating fragment with arguments
     public static OnlyMapFragment newInstance(int page, String title) {
@@ -167,12 +171,13 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
         initListeners();
 
         getViewModel().init().getShopsLiveData().observe(this, shops -> {
-            if(shops == null) return;
+            if (shops == null) return;
 
             for (Shop shop : shops) {
                 mMap.addMarker(shop.getMarkerOptions());
@@ -190,6 +195,11 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                MY_PERMISSIONS_REQUEST_LOCATION);
+    }
+
+    private void initCamera() {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -212,13 +222,10 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
         Location target = new Location("Minsk");
         target.setLatitude(mMinsk.latitude);
         target.setLongitude(mMinsk.longitude);
-        initCamera(target);
-    }
 
-    private void initCamera(Location location) {
         CameraPosition position = CameraPosition.builder()
-                .target(new LatLng(location.getLatitude(),
-                        location.getLongitude()))
+                .target(new LatLng(target.getLatitude(),
+                        target.getLongitude()))
                 .zoom(11.7f)
                 .bearing(0.0f)
                 .tilt(0.0f)
@@ -302,5 +309,18 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
     @Override
     protected Class<MapViewModel> getViewModelClass() {
         return MapViewModel.class;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initCamera();
+                }
+                break;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
