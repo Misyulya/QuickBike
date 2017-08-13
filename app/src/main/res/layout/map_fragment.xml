@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:paddingBottom="@dimen/bottom_navigation_view_height">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:paddingBottom="@dimen/bottom_navigation_view_height">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -13,17 +14,28 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
-        card_view:cardCornerRadius="5dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/padding_normal"
         android:layout_marginStart="@dimen/padding_normal"
         android:layout_marginTop="@dimen/padding_normal"
-        android:layout_height="wrap_content">
+        card_view:cardCornerRadius="5dp">
 
-    <com.example.dmitry.quickbike.ui.widget.BicycleSearchWidget
-        android:id="@+id/search_widget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </com.example.dmitry.quickbike.ui.widget.BicycleSearchWidget>
+        <com.example.dmitry.quickbike.ui.widget.BicycleSearchWidget
+            android:id="@+id/search_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </com.example.dmitry.quickbike.ui.widget.BicycleSearchWidget>
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="80dp"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+        >
+
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>
