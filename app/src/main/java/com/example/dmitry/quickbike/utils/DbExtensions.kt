@@ -2,6 +2,7 @@ package com.example.dmitry.quickbike.utils
 
 import android.util.Log
 import com.example.dmitry.quickbike.db.BikeDatabase
+import com.example.dmitry.quickbike.entity.Bicycle
 import com.example.dmitry.quickbike.entity.Shop
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -23,8 +24,13 @@ fun BikeDatabase.fillContent(): Completable {
             Shop(companyId = 1L, name = "Minsk shop", latitude = 53.900, longitude = 27.567)
     )
 
+    val bikesList: List<Bicycle> = arrayListOf(
+            Bicycle(id = 1L, shopId = 1L, price = 200L, name = "Trek 2000")
+    )
+
     return Completable.fromCallable {
         shopsDao().insertMultiple(shopsList)
+        bikesDao().insertMultiple(bikesList)
     }.doAsync()
 }
 
