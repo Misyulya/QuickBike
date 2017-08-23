@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.example.dmitry.quickbike.R;
+import com.example.dmitry.quickbike.entity.ShopWithBicycles;
 import com.example.dmitry.quickbike.architecture.vm.MapViewModel;
-import com.example.dmitry.quickbike.entity.Shop;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -176,11 +176,11 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
 
         initListeners();
 
-        getViewModel().init().getShopsLiveData().observe(this, shops -> {
-            if (shops == null) return;
+        getViewModel().init().getShopsLiveData().observe(this, shopWithBicycles -> {
+            if (shopWithBicycles == null) return;
 
-            for (Shop shop : shops) {
-                mMap.addMarker(shop.getMarkerOptions());
+            for (ShopWithBicycles shopWithBicycle : shopWithBicycles) {
+                mMap.addMarker(shopWithBicycle.shop.getMarkerOptions());
             }
         });
 
