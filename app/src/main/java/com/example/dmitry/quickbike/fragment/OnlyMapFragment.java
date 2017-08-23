@@ -180,6 +180,7 @@ public class OnlyMapFragment extends BaseFragment<MapViewModel> implements IMapV
             if (shopWithBicycles == null) return;
 
             for (ShopWithBicycles shopWithBicycle : shopWithBicycles) {
+                //TODO LM_DM maybe better to request shopWithBicycle just for selected marker?
                 mMap.addMarker(shopWithBicycle.shop.getMarkerOptions());
             }
         });
