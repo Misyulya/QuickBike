@@ -101,8 +101,9 @@ Objects:
   contactInfo: <obj:ContactInfo>
 }
 ```
+---
 
-```
+
 
 # API
 
@@ -143,7 +144,7 @@ Objects:
 
 ### readBikes
 
-Возвращает список магазинов.
+Возвращает список велосипедов.
 
 #### Request
 
