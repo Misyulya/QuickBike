@@ -1,9 +1,9 @@
 Objects:
-* [?&lt;obj: Bike&gt;](#obj-bike)
-* Shop
-* Company
-* Order
-* Profile
+* [&lt;obj: Bike&gt;](#obj-bike)
+* [&lt;obj: Shop&gt;](#obj-shop)
+* [&lt;obj: Company&gt;](#obj-company)
+* [&lt;obj: Order&gt;](#obj-order)
+* [&lt;obj: Profile&gt;](#obj-profile)
 
 # Используемые объекты
 
@@ -99,20 +99,9 @@ Objects:
   firstName: <str>,
   lastName: <str>,
   contactInfo: <obj:ContactInfo>
-  ...
 }
 ```
 
-
-### &lt;obj: Profile&gt;
-```javascript
-{
-  id: <pint>,
-  firstName: <str>,
-  lastName: <str>,
-  contactInfo: <obj:ContactInfo>
-  ...
-}
 ```
 
 # API
@@ -126,7 +115,7 @@ Objects:
 ```javascript
 {
   filter:{
-	  order: {
+    order: {
       from: <str(date)>,
       to: <str(date),
     },
@@ -143,10 +132,10 @@ Objects:
 
 ```javascript
 {
-	?ok: {
-		shops: [<obj: Shop>, ...],
-	},
-	?errors: [...]
+ ?ok: {
+	shops: [<obj: Shop>, ...],
+ },
+?errors: [...]
 }
 ```
 ---
@@ -161,7 +150,7 @@ Objects:
 ```javascript
 {
   filter:{
-	  order: {
+    order: {
       from: <str(date)>,
       to: <str(date),
     },
@@ -178,10 +167,10 @@ Objects:
 
 ```javascript
 {
-	?ok: {
-		bikes: [<obj: Bike>, ...],
-	},
-	?errors: [...]
+ ?ok: {
+	bikes: [<obj: Bike>, ...],
+ },
+?errors: [...]
 }
 ```
 ---
@@ -205,10 +194,10 @@ Objects:
 
 ```javascript
 {
-	?ok: {
-	  order: [<obj: Order>, ...],
-	},
-	?errors: [...]
+ ?ok: {
+	order: [<obj: Order>, ...],
+ },
+?errors: [...]
 }
 ```
 
